@@ -6,7 +6,7 @@ function verificaSeOChutePossuiUmValorValido(chute) {
         return
     }
 
-    if (numeroForMaiorOuMenosQueOValorPermitido(numero)) {
+    if (numeroForMaiorOuMenorQueOValorPermitido(numero)) {
         elementoChute.innerHTML += `
         <div> 
             Valor inválido: Fale um número entre ${menorValor} e ${maiorValor} 
@@ -31,24 +31,35 @@ function verificaSeOChutePossuiUmValorValido(chute) {
         <div>O número secreto é maior <i class="fa-solid fa-up-long"></i></div>
         `
     }
+
+    if (chute.toUpperCase() === "GAME OVER") {
+        document.body.innerHTML = `
+        <h2>Game Over!!!</h2>
+        <h3>Pressione o botão para jogar novamente</h3>
+        <button id="jogar-novamente" class="btn-jogar" >Jogar novamente</button>
+        `
+
+        document.body.style.backgroundColor = "black"
+    } else {
+        elementoChute.innerHTML += '<div> Valor inválido </div>'
+    }
 }
 
 function chuteForInvalido(numero) {
     return Number.isNaN(numero)
 }
 
-function numeroForMaiorOuMenosQueOValorPermitido(numero) {
+function numeroForMaiorOuMenorQueOValorPermitido(numero) {
     return numero > maiorValor || numero < menorValor
 }
 
-// document.body.addEventListener('click', e => {
-//     if (e.target.id == 'jogar-novamente') {
-//            window.location.reload()
-//     }
-// })
-
-const againButton = document.getElementById('jogar novamente')
-
-againButton.addEventListener('click', () => {
-    window.location.reload()
+document.body.addEventListener('click', e => {
+    if (e.target.id == 'jogar-novamente') {
+           window.location.reload()
+    }
 })
+
+// const againButton = document.getElementById('jogar novamente')
+// againButton.addEventListener('click', () => {
+//     window.location.reload()
+// })
